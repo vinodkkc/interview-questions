@@ -1,0 +1,46 @@
+terraform questions:
+
+
+1.when you creating the environment using terraform,what are the components u r been using terraform.
+A)vpc subnets ebs volumes internetgateway, s3, alb,nlb, providers
+2.how to do changes in already create resources using terraform?
+A)Already changes resource one command using terraform import
+3)when the terraform run state file created right,what you do that state file, where do you find it ?
+A)the terraform state files shows infratcture details in local storing laptop,and storing in s3 bucket are else terraform cloud
+
+4) if you loose terraform tf state file how to retriew it.
+
+5) what are the major features identified in terraform
+
+6) what is the language that used in terraform hcl
+
+7) terraform validate
+
+8) life cycle of terraform: 
+
+9)ansible:
+
+1. ansible vs terraform
+2.we have 20 resources public cloud, which just have to destroy
+A) terraform destroy -- target resource and id
+
+3)how do you preesure the key the terraform
+A) aws cli, store key home, terraform add name to use to work
+
+4) azure storage kept in statefile deleted terraform 
+
+A) all resources are duplicated, and created the resources
+
+5) modules in terraform
+A) 1. root module, child moudule, publish module
+
+6)parent module or child module modules called like child module
+ root module
+
+7) remote backend --->
+
+8) multiple types provide variable in run time
+
+9) multiple environmrnt in use codes 
+
+10) can you draw backs of terraform
