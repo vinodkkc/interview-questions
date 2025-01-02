@@ -50,3 +50,93 @@ https://cloudchamp.notion.site/Terraform-Scenario-based-Interview-Questions-bce2
 9) multiple environmrnt in use codes 
 
 10) can you draw backs of terraform
+scenero:1- you are managing a complex infrasture with multiple components, and you need to ensure that terraform deploys all resources in the correct order, what steps can you take to accomplish this?
+ANS:)Depends upon created resources,
+resource "aws_network_interface"
+
+scenero:2)- you need to create multiple instances of the same accomplish this efficiently in terraform?
+ANS:-)TERRAFORM ALLOWS TO CREATE LOOPS AND, SAME RESOURCES META ARGUMENT (COUNT), creating resource
+
+resource "aws_instance" "my_ec2"{
+   count = 3
+    Ani = "ami-uut"
+    instance_type= :t2.micro"
+     tags = {
+        name = "example-${count.index}"
+}
+}
+
+scenero:3:you want create an ec2 instance using terraform and then execute a shell script on the instance after it has been created.how can you achieve this?
+
+ans)remote-exec provisioner using to execute in script
+
+provisiner "remote_exec" {
+ inline= []
+}
+
+scenero:4) you want to create a terraform module that can be reused across multiple projects but you need to parameterize certain values so that they can be customized for each project.How can you accomplish this in terraform?
+
+ans:) terraform module is set of terraform configurations files in a single directory with one or more.tf files is a module.when you run terraform commands directly from such a directory, it is considered the root module.
+
+module "myec2" {
+  source = "./myec2"
+  region = "us-east-2"
+}
+
+
+scenero:5) you have a terraform configuration that creates multiple resources in a specific order, but you need to skip a specific resource in the sequence.How can you accomplish this in terraform?
+sol: - target 
+
+skip the resouce in order to create a required resources
+
+terraform apply target=aws_network_instanceexanple -target=aws_instance.example
+
+using depends upon option to create required instances.
+
+scenero:6) you want to deploy a terraform configuration that creates an ec2 instance in a specific availability zone, but you arenot sure which availability zone to use how can you dynamicallly select an availability zone at runtime in terraform?
+
+sol:)data resources 
+
+data "aws_availability_zones" "available"{}
+
+resource "random_shuffle" ""azs"{
+ input = data.aws_availability_zones.available.names
+} 
+
+variable "az" {
+defaut = "${random_shuffle.azs.result[0]}"
+}
+
+resource "aws_instance" "example" {
+
+}
+
+scenero:7) you have a terraform configuration that provisions on aws ec2 instance security group and keypair, you want to add new ebs volume to the ec2 instance.how would you go about doing this?
+
+sol)resource "aws_ebs_volume" "my_ebs" {
+    availability_zone = "us-east-1a"
+    size = 20
+     tags= {
+        Name = "my_web_ebs
+}
+}
+
+resource " aws_volume_attachment" "ebs_attach" {
+  device_name = "/dev/sdf"
+  volume_id = "${aws_ebs_volume.my_ebs.id}"
+  instance_id = ${aws_instance.myec2.id}"
+}
+
+
+scenero:8) you have an application that requires an aws rds instance and you want to manage its lifecycle using terraform.what steps would you take to achieve this?
+sol:)resource "aws_db_instance" "my_rds"{}
+
+scenero:9) you want to deploy a terraform configuration that creates an amazon rds instances in a vpc with a specific subnet group, security group and paramters group?
+
+terraform apply -var "allowed_ip=192.168.0.1/32"
+
+--------------------------------------------------------------
+practice:
+
+1. explain core terraform end to end workflow to deploy and delete resources in azure or aws cloud?
+a)
